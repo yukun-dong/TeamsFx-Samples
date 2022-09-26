@@ -64,7 +64,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.get-latest-tag.outputs.tag }}
-          artifacts: ${{ runner.temp }}/teamsfx_samples
+          artifacts: ${{ runner.temp }}/teamsfx_samples/*.zip
           allowUpdates: true
       
       - name: release sample new version on github
@@ -73,6 +73,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.bump-version.outputs.new_tag }}
-          artifacts: ${{ runner.temp }}/teamsfx_samples
+          artifacts: ${{ runner.temp }}/teamsfx_samples/*.zip
           allowUpdates: true
           
