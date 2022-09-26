@@ -24,6 +24,6 @@ for SAMPLE in ${SAMPLE_LIST[@]}; do
     fi
 
     cd ./${SAMPLE}
-    zip -rq ${SAMPLE}.zip .
+    zip -rq ${SAMPLE_OUTPUT_DIR}/${SAMPLE}.zip .
     cd -
 done
