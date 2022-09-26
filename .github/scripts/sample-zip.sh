@@ -13,7 +13,7 @@ fi
 SAMPLE_OUTPUT_DIR=$1
 mkdir -p ${SAMPLE_OUTPUT_DIR}
 
-SAMPLE_LIST=$(jq -r '.samples[]' ../sample-list.json)
+SAMPLE_LIST=$(jq -r '.samples[]' ./.github/sample-list.json)
 
 for SAMPLE in ${SAMPLE_LIST[@]}; do
 
