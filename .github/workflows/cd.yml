@@ -45,13 +45,13 @@ jobs:
 
       - name: update sample tag list release
         uses: ncipollo/release-action@v1.10.0
-          with:
-            artifacts: ${{ runner.temp }}/sample-tags.txt
-            name: "Sample Tag List"
-            body: "Release to maintain sample tag list."
-            token: ${{ secrets.GITHUB_TOKEN }}
-            tag: "sample-tag-list"
-            allowUpdates: true
+        with:
+          artifacts: ${{ runner.temp }}/sample-tags.txt
+          name: "Sample Tag List"
+          body: "Release to maintain sample tag list."
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: "sample-tag-list"
+          allowUpdates: true
 
       - name: generate sample zip
         run: .github/scripts/sample-zip.sh ${{ runner.temp }}/teamsfx_samples
@@ -67,10 +67,10 @@ jobs:
       
       - name: release sample new version on github
         if: ${{ github.event.inputs.update-tag != 'no' }}
-          uses: ncipollo/release-action@v1.10.0
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            tag: ${{ steps.bump-version.outputs.new_tag }}
-            artifacts: ${{ runner.temp }}/teamsfx_samples
-            allowUpdates: true
+        uses: ncipollo/release-action@v1.10.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.bump-version.outputs.new_tag }}
+          artifacts: ${{ runner.temp }}/teamsfx_samples
+          allowUpdates: true
           
