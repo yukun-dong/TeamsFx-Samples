@@ -57,9 +57,6 @@ jobs:
           WITH_V: true
           INITIAL_VERSION: ${{ steps.get-latest-tag.outputs.tag }}
         id: bump-version
-      
-      - name: generate tag list
-        run: git tag | grep v > ${{ runner.temp }}/sample-tags.txt
 
       - name: update sample tag list release
         uses: ncipollo/release-action@v1.10.0
@@ -103,4 +100,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.bump-version.outputs.new_tag }}
           artifacts: ${{ runner.temp }}/teamsfx_samples/*.zip
+      
+      - name: generate tag list
+        run: git tag | grep v > ${{ runner.temp }}/sample-tags.txt
           
