@@ -53,20 +53,9 @@ jobs:
         uses: anothrNick/github-tag-action@1.26.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
           WITH_V: true
           INITIAL_VERSION: ${{ steps.get-latest-tag.outputs.tag }}
         id: bump-version
-
-      - name: update sample tag list release
-        uses: ncipollo/release-action@v1.10.0
-        with:
-          artifacts: ${{ runner.temp }}/sample-tags.txt
-          name: "Sample Tag List"
-          body: "Release to maintain sample tag list."
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: "sample-tag-list"
-          allowUpdates: true
 
       - name: generate sample zip
         run: .github/scripts/sample-zip.sh ${{ runner.temp }}/teamsfx_samples
@@ -103,4 +92,14 @@ jobs:
       
       - name: generate tag list
         run: git tag | grep v > ${{ runner.temp }}/sample-tags.txt
+
+      - name: update sample tag list release
+        uses: ncipollo/release-action@v1.10.0
+        with:
+          artifacts: ${{ runner.temp }}/sample-tags.txt
+          name: "Sample Tag List"
+          body: "Release to maintain sample tag list."
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: "sample-tag-list"
+          allowUpdates: true
           
