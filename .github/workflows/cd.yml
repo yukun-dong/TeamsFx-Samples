@@ -7,6 +7,10 @@ on:
         description: "preid name(rc, stable)"
         required: true
         default: "rc"
+      bumpType:
+        description: "bump type(major, minor, patch)"
+        required: true
+        default: "patch"
   schedule:
     - cron: "0 8 * * *"
 jobs:
@@ -55,11 +59,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-          DEFAULT_BUMP: patch
+          DEFAULT_BUMP: ${{ github.event.inputs.bumpType }}
           INITIAL_VERSION: ${{ steps.get-latest-tag.outputs.tag }}
           RELEASE_BRANCHES: release
         id: bump-version
-        
+
 
       - name: generate sample zip
         run: .github/scripts/sample-zip.sh ${{ runner.temp }}/teamsfx_samples
