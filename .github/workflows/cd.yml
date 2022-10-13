@@ -24,7 +24,6 @@ jobs:
           echo It's not allowed to run release rc or stable except release branch.
           exit 1
       
-      
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
