@@ -58,6 +58,7 @@ jobs:
           RELEASE_BRANCHES: release
         id: bump-version
 
+
       - name: generate sample zip
         run: .github/scripts/sample-zip.sh ${{ runner.temp }}/teamsfx_samples
       
