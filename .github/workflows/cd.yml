@@ -92,6 +92,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.bump-version.outputs.new_tag }}
           artifacts: ${{ runner.temp }}/teamsfx_samples/*.zip
+
+      - name: release sample V3 new version on github
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.preid == 'stable' }}
+        uses: ncipollo/release-action@v1.10.0
+        with:
+          name: TeamsFx Sample V1
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.bump-version.outputs.new_tag }}
+          artifacts: ${{ runner.temp }}/teamsfx_samples/*.zip
       
       - name: generate tag list
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.preid == 'stable' }}
